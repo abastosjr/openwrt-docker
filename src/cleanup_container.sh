@@ -18,11 +18,55 @@ cleanup() {
         echo 1 > /sys/bus/pci/rescan
     fi
 
-     if [ -n "$PCI_2" ]; then
+    if [ -n "$PCI_2" ]; then
         if [[ "$PCI_2" =~ ^[0-9]{4}: ]]; then
             PCI_SLOT="$PCI_2"
         else
             PCI_SLOT="0000:$PCI_2"
+        fi
+        echo "Attaching PCI device $PCI_SLOT back to the host"
+        echo 1 > /sys/bus/pci/devices/$PCI_SLOT/remove
+        echo 1 > /sys/bus/pci/rescan
+    fi
+
+    if [ -n "$PCI_3" ]; then
+        if [[ "$PCI_3" =~ ^[0-9]{4}: ]]; then
+            PCI_SLOT="$PCI_3"
+        else
+            PCI_SLOT="0000:$PCI_3"
+        fi
+        echo "Attaching PCI device $PCI_SLOT back to the host"
+        echo 1 > /sys/bus/pci/devices/$PCI_SLOT/remove
+        echo 1 > /sys/bus/pci/rescan
+    fi
+
+    if [ -n "$PCI_4" ]; then
+        if [[ "$PCI_4" =~ ^[0-9]{4}: ]]; then
+            PCI_SLOT="$PCI_4"
+        else
+            PCI_SLOT="0000:$PCI_4"
+        fi
+        echo "Attaching PCI device $PCI_SLOT back to the host"
+        echo 1 > /sys/bus/pci/devices/$PCI_SLOT/remove
+        echo 1 > /sys/bus/pci/rescan
+    fi
+
+    if [ -n "$PCI_5" ]; then
+        if [[ "$PCI_5" =~ ^[0-9]{4}: ]]; then
+            PCI_SLOT="$PCI_5"
+        else
+            PCI_SLOT="0000:$PCI_5"
+        fi
+        echo "Attaching PCI device $PCI_SLOT back to the host"
+        echo 1 > /sys/bus/pci/devices/$PCI_SLOT/remove
+        echo 1 > /sys/bus/pci/rescan
+    fi
+
+    if [ -n "$PCI_6" ]; then
+        if [[ "$PCI_2" =~ ^[0-9]{4}: ]]; then
+            PCI_SLOT="$PCI_6"
+        else
+            PCI_SLOT="0000:$PCI_6"
         fi
         echo "Attaching PCI device $PCI_SLOT back to the host"
         echo 1 > /sys/bus/pci/devices/$PCI_SLOT/remove

@@ -227,6 +227,10 @@ USB_ARGS="${USB_1_ARGS} ${USB_2_ARGS}"
 PCI_ARGS=""
 PCI_1_ARGS=""
 PCI_2_ARGS=""
+PCI_3_ARGS=""
+PCI_4_ARGS=""
+PCI_5_ARGS=""
+PCI_6_ARGS=""
 if [[ -n "$PCI_1" ]]; then
   if [[ "$PCI_1" =~ ^[0-9]{4}: ]]; then
     PCI_SLOT="$PCI_1"
@@ -247,7 +251,47 @@ if [[ -n "$PCI_2" ]]; then
   PCI_2_ARGS="-device vfio-pci,host=$PCI_SLOT"
 fi
 
-PCI_ARGS="${PCI_1_ARGS} ${PCI_2_ARGS}"
+if [[ -n "$PCI_3" ]]; then
+  if [[ "$PCI_3" =~ ^[0-9]{4}: ]]; then
+    PCI_SLOT="$PCI_3"
+  else
+    PCI_SLOT="0000:$PCI_3"
+  fi
+  attach_pci_device "$PCI_SLOT"
+  PCI_3_ARGS="-device vfio-pci,host=$PCI_SLOT"
+fi
+
+if [[ -n "$PCI_4" ]]; then
+  if [[ "$PCI_4" =~ ^[0-9]{4}: ]]; then
+    PCI_SLOT="$PCI_4"
+  else
+    PCI_SLOT="0000:$PCI_4"
+  fi
+  attach_pci_device "$PCI_SLOT"
+  PCI_4_ARGS="-device vfio-pci,host=$PCI_SLOT"
+fi
+
+if [[ -n "$PCI_5" ]]; then
+  if [[ "$PCI_5" =~ ^[0-9]{4}: ]]; then
+    PCI_SLOT="$PCI_5"
+  else
+    PCI_SLOT="0000:$PCI_5"
+  fi
+  attach_pci_device "$PCI_SLOT"
+  PCI_5_ARGS="-device vfio-pci,host=$PCI_SLOT"
+fi
+
+if [[ -n "$PCI_6" ]]; then
+  if [[ "$PCI_6" =~ ^[0-9]{4}: ]]; then
+    PCI_SLOT="$PCI_6"
+  else
+    PCI_SLOT="0000:$PCI_6"
+  fi
+  attach_pci_device "$PCI_SLOT"
+  PCI_6_ARGS="-device vfio-pci,host=$PCI_SLOT"
+fi
+
+PCI_ARGS="${PCI_1_ARGS} ${PCI_2_ARGS} ${PCI_3_ARGS} ${PCI_4_ARGS} ${PCI_5_ARGS} ${PCI_6_ARGS}"
 
 
 info "Booting image using $VERS..."

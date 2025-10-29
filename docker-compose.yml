@@ -1,32 +1,37 @@
 services:
   openwrt:
     container_name: openwrt
-    image: albrechtloh/openwrt-docker:latest # for latest OpenWrt stable version
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #image: albrechtloh/openwrt-docker:latest # for latest OpenWrt stable version
     #image: albrechtloh/openwrt-docker:openwrt-master-snapshot # for latest OpenWrt master version
     #image: openwrt-docker
 
     environment:
       # Define which physical or virtual WAN Ethernet interfaces shall be attach direct to OpenWrt
       # If unset -> host
-      WAN_IF: "host" # Usage of container host Ethernet connection as WAN.
-                     # WARNING: Bad performance because of user space Ethernet implementation (SLIRP).
-                     # QEMUs default network configuration network: 10.0.2.0/24 incl. DHCP, DNS, NAT
-                     # See https://wiki.qemu.org/Documentation/Networking for more details
+      WAN_IF:
+        "none" # Usage of container host Ethernet connection as WAN.
+        # WARNING: Bad performance because of user space Ethernet implementation (SLIRP).
+        # QEMUs default network configuration network: 10.0.2.0/24 incl. DHCP, DNS, NAT
+        # See https://wiki.qemu.org/Documentation/Networking for more details
       #WAN_IF: "none" # No WAN interface defined.
-                    # This is useful if OpenWrt WAN acts a USB Wi-Fi client or as USB cellular modem
+      # This is useful if OpenWrt WAN acts a USB Wi-Fi client or as USB cellular modem
       #WAN_IF: "enx00e04c0407a6" # Use this option to define a specific physical Ethernet interface
 
       # Define which physical or virtual LAN Ethernet interfaces shall be attach direct to OpenWrt
       # If unset -> host
       #LAN_IF: "host" # Usage of container host Ethernet connection as LAN.
-                     # WARNING: Bad performance because of user space Ethernet implementation (SLIRP).
-                     # QEMUs network configuration network: 192.168.1.0/24
-                     # To be usable add to the OpenWrt LAN interface an IP address in the range 192.168.1.10-192.168.1.255 (recommend is 192.168.1.15)
-                     # See https://wiki.qemu.org/Documentation/Networking for more details
-      LAN_IF: "veth" # veth pair between OpenWrt and host system.
-                     # The host Ethernet interface IP is fixed to 172.31.1.2/24
+      # WARNING: Bad performance because of user space Ethernet implementation (SLIRP).
+      # QEMUs network configuration network: 192.168.1.0/24
+      # To be usable add to the OpenWrt LAN interface an IP address in the range 192.168.1.10-192.168.1.255 (recommend is 192.168.1.15)
+      # See https://wiki.qemu.org/Documentation/Networking for more details
+      LAN_IF:
+        "veth" # veth pair between OpenWrt and host system.
+        # The host Ethernet interface IP is fixed to 172.31.1.2/24
       #LAN_IF: "veth,nofixedip" # veth pair between OpenWrt and host system.
-                               # No host Ethernet interface configuration
+      # No host Ethernet interface configuration
       #LAN_IF: "enx00e04d68033f" # Use this option to define a specific physical Ethernet interface
 
       # Make LuCI OpenWrt web interface accessible via host LAN at the address "https://<host-ip>:9000"
@@ -58,6 +63,10 @@ services:
       # If unset -> disabled
       #PCI_1: "00:1f.6"
       #PCI_2: "0000:00:1f.6"
+      #PCI_3: "0000:00:1f.6"
+      #PCI_4: "0000:00:1f.6"
+      #PCI_5: "0000:00:1f.6"
+      #PCI_6: "0000:00:1f.6"
 
       # Define number of VM CPUs
       # If unset -> 1
@@ -147,7 +156,7 @@ services:
     devices:
       - /dev/kvm
     device_cgroup_rules:
-      - 'c *:* rwm'
+      - "c *:* rwm"
     cap_add:
       - NET_ADMIN
     pid: "host"
@@ -158,4 +167,3 @@ services:
 
 volumes:
   data:
-

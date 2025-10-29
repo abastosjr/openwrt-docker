@@ -16,6 +16,10 @@ trap 'error "Status $? while: $BASH_COMMAND (line $LINENO/$BASH_LINENO)"' ERR
 : "${USB_2:=""}"          # USB 2 vendor and device ID
 : "${PCI_1:=""}"          # PCI 1 slot (first number in lspci)
 : "${PCI_2:=""}"          # PCI 2 slot (first number in lspci)
+: "${PCI_3:=""}"          # PCI 3 slot (first number in lspci)
+: "${PCI_4:=""}"          # PCI 4 slot (first number in lspci)
+: "${PCI_5:=""}"          # PCI 5 slot (first number in lspci)
+: "${PCI_6:=""}"          # PCI 6 slot (first number in lspci)
 : "${FORWARD_LUCI:=""}"   # Make LuCI OpenWrt web interface accessible via host LAN
 : "${LUCI_WEB_BUTTON_JSON:=""}"   # Adapt the "OpenWrt LuCI web interface" button to your needs.
 : "${OPENWRT_AFTER_BOOT_CMD:=""}" # User command or script to run after OpenWrt is booted

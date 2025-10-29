@@ -102,8 +102,16 @@ export class BackendCommunicationService {
         const tmpPci = [];
         const tmpPci1 = text.match(/declare -x PCI_1="([^"]+)"/);
         const tmpPci2 = text.match(/declare -x PCI_2="([^"]+)"/);
+        const tmpPci3 = text.match(/declare -x PCI_3="([^"]+)"/);
+        const tmpPci4 = text.match(/declare -x PCI_4="([^"]+)"/);
+        const tmpPci5 = text.match(/declare -x PCI_5="([^"]+)"/);
+        const tmpPci6 = text.match(/declare -x PCI_6="([^"]+)"/);
         if (tmpPci1) tmpPci.push(tmpPci1[1]);
         if (tmpPci2) tmpPci.push(tmpPci2[1]);
+        if (tmpPci3) tmpPci.push(tmpPci3[1]);
+        if (tmpPci4) tmpPci.push(tmpPci4[1]);
+        if (tmpPci5) tmpPci.push(tmpPci5[1]);
+        if (tmpPci6) tmpPci.push(tmpPci6[1]);
 
         return {
           lan: tmpLan,
