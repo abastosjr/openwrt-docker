@@ -67,6 +67,12 @@ services:
       #PCI_4: "0000:00:1f.6"
       #PCI_5: "0000:00:1f.6"
       #PCI_6: "0000:00:1f.6"
+      PCI_1: ${PCI_1}
+      PCI_2: ${PCI_2}
+      PCI_3: ${PCI_3}
+      PCI_4: ${PCI_4}
+      PCI_5: ${PCI_5}
+      PCI_6: ${PCI_6}
 
       # Define number of VM CPUs
       # If unset -> 1
